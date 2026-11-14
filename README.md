@@ -1,6 +1,8 @@
-# DeepSpec
+# DeepSpec + DSparkX
 
 DeepSpec is a full-stack codebase for training and evaluating draft models for speculative decoding. It contains data preparation utilities, draft model implementations, training code, and evaluation scripts.
+
+> **DSparkX（本仓库的改进）**：在 DSpark 之上新增「共享表征 H → 通用轮廓专家 → K 小专家并行解码+置信度 → 逐位裁决 → 不淘汰·线索回补」流水线。设计图与逐段说明见 [docs/dsparkx_design.md](./docs/dsparkx_design.md)；训练配置 [config/dsparkx/dsparkx_qwen3_4b.py](./config/dsparkx/dsparkx_qwen3_4b.py)，评测入口与训练脚本与原版完全一致（评测按 checkpoint 的 `architectures=Qwen3DSparkXModel` 自动路由），冒烟测试 [tests/test_dsparkx_smoke.py](./tests/test_dsparkx_smoke.py)。`eval_datasets/*.jsonl` 与上游 deepseek-ai/DeepSpec 完全一致，未重复提交。
 
 ## Environment
 
@@ -66,7 +68,7 @@ The checkpoints below are the ones used for Table 1 in the [paper](https://arxiv
 
 ## Supported Algorithms
 
-Currently, DeepSpec includes three draft models: [DSpark](https://arxiv.org/abs/2607.05147), [DFlash](https://arxiv.org/abs/2602.06036) and [Eagle3](https://arxiv.org/abs/2503.01840).
+Currently, DeepSpec includes three draft models: [DSpark](https://arxiv.org/abs/2607.05147), [DFlash](https://arxiv.org/abs/2602.06036) and [Eagle3](https://arxiv.org/abs/2503.01840), plus this repository's extension **DSparkX** ([design doc](./docs/dsparkx_design.md)).
 
 ## License
 
